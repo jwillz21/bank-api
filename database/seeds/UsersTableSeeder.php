@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
       //   ];
       // shuffle($name);
       for ($i = 0; $i < sizeOf($name); $i++){
-        App\Users::create([
+        App\User::create([
           // 'name' => implode($name[$i]),
           'name' => $name[$i],
           'email' => str_replace(' ', '.', $name[$i]. '@gmail.com'),
