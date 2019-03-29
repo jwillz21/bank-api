@@ -31,3 +31,12 @@ Route::group([
         // Route::post('reset', 'AuthController@sendPasswordResetNotification');
         // Route::post('me', 'AuthController@me');
     });
+
+//plaid
+Route::post('addPlaid', 'PlaidController@addPlaid');
+Route::post('eAuth', 'PlaidController@enterAuth');
+Route::post('connect', 'PlaidController@connect');
+// Route::post('exchange', 'PlaidController@exchange');
+// Route::get('user', 'PlaidController@showUser');
+// Route::get('categories', 'PlaidController@getCategories');
+// Route::get('token', 'PlaidController@getToken');

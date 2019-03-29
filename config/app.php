@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+        Travoltron\Plaid\PlaidServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         // 'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        Travoltron\Plaid\PlaidServiceProvider::class,
 
     ],
 

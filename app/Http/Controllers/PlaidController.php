@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Travoltron\Plaid\Plaid;
+use App\Bank_Accounts;
 use JWTFactory;
 use App\User;
 use JWTAuth;
-use Plaid;
 use Auth;
 
 class PlaidController extends Controller
@@ -18,10 +19,10 @@ class PlaidController extends Controller
 
   public function addPlaid(Request $request) // adds a plaid user
   {
-    $username = $request->input('bank_username');
-    $password = $request->input('bank_password');
+    $username = $request->input('bank_username'); // 'plaid_test'
+    $password = $request->input('bank_password'); // 'plaid_good'
     $pin = $request->input('pin'); // set null
-    $type = $request->input('type');
+    $type = $request->input('type'); // 'chase'
     // $user = auth()->user();
     $user = JWTAuth::user();
 
@@ -70,7 +71,7 @@ class PlaidController extends Controller
     $events = [];
     for($i = 0; $i < count($getConnectData); $i++){
 
-      $transactions = Transactions::insert([
+      $transactions = Transaction::insert([
         'user_id' => $user ['id'],
         'business_id' => $business, //section may be deleted once business identifier has been chosen
         'plaid_transaction_id' => $getConnectData[$i]['_id'] ?? null,
@@ -86,7 +87,7 @@ class PlaidController extends Controller
         'transaction_type' => $getConnectData[$i]['type']['primary'] ?? null,
         'date' => $getConnectData[$i]['date'] ?? null
       ]);
-      $events[$i] = event(new TransactionUpdate(Transactions::latest('id')->first()));
+      $events[$i] = event(new TransactionUpdate(Transaction::latest('id')->first()));
     }
     return $getConnectData;
   }
